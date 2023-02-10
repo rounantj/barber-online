@@ -18,7 +18,7 @@ app.set('views', `${__dirname}/../views`);
 app.use('/api', api);
 app.use('/', views);
 
-const port = process.env.PORT || 3000;
+const port = 3020;
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });
