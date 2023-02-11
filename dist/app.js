@@ -31,18 +31,21 @@ const api_1 = __importDefault(require("./api"));
 const views_1 = __importDefault(require("./views"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const hbs = __importStar(require("express-handlebars"));
+const mongo_1 = __importDefault(require("./core/mongo"));
 const app = (0, express_1.default)();
 const handlebars = hbs.create({
-    defaultLayout: 'main',
+    defaultLayout: "main",
 });
 dotenv_1.default.config();
-app.use(express_1.default.static('public'));
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
-app.set('views', `${__dirname}/../views`);
-app.use('/api', api_1.default);
-app.use('/', views_1.default);
-const port = process.env.PORT || 3000;
+app.use(express_1.default.static("public"));
+app.engine("handlebars", handlebars.engine);
+app.set("view engine", "handlebars");
+app.set("views", `${__dirname}/../views`);
+(0, mongo_1.default)();
+app.use("/api", api_1.default);
+app.use("/", views_1.default);
+//app.use("/api-docs", swaggerUi.serve, swaggerUi.setup("./swagger.yml"));
+const port = 3020;
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });

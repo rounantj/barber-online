@@ -1,0 +1,146 @@
+swagger: "2.0"
+info:
+  description: API documentation for user and service management
+  version: 1.0.0
+  title: User and Service Management API
+host: localhost:3000
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /refresh-token:
+    post:
+      summary: Refreshes the token for a user
+      description: Refreshes the token for a user
+      parameters:
+        - in: header
+          name: auth-token
+          type: string
+          required: true
+      responses:
+        200:
+          description: Token refreshed successfully
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+        400:
+          description: Unauthorized
+      security:
+        - bearerAuth: []
+
+  /register:
+    post:
+      summary: Register a new user
+      description: Register a new user
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: User registered successfully
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+        400:
+          description: Bad request
+
+  /login:
+    post:
+      summary: Login a user
+      description: Login a user
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: User login successful
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+        400:
+          description: Bad request
+  /servicos:
+    get:
+      summary: Get all services
+      description: Get all services
+      parameters:
+        - in: header
+          name: auth-token
+          type: string
+          required: true
+      responses:
+        200:
+          description: Services retrieved successfully
+          schema:
+            type: array
+            items:
+              type: object
+        400:
+          description: Unauthorized
+    put:
+      summary: Create a new service
+      description: Create a new service
+      parameters:
+        - in: header
+          name: auth-token
+          type: string
+          required: true
+        - in: body
+          name: service
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+      responses:
+        200:
+          description: Service created successfully
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+        400:
+          description: Unauthorized
+  /servicos/{id}:
+    delete:
+      summary: Delete a service
+      description: Delete a service
+      parameters:
+        - in: header
+          name: auth-token
+          type: string
+          required: true
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        200:
