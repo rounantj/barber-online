@@ -12,7 +12,7 @@ const handlebars = hbs.create({
   defaultLayout: "main",
 });
 dotenv.config();
-app.use(express.static("public"));
+
 app.engine("handlebars", handlebars.engine);
 app.set("view engine", "handlebars");
 app.set("views", `${__dirname}/../views`);
@@ -23,6 +23,7 @@ app.use("/", views);
 //app.use("/api-docs", swaggerUi.serve, swaggerUi.setup("./swagger.yml"));
 
 const port = 3020;
+app.use(express.static("public"));
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
