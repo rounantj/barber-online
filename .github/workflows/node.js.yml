@@ -19,9 +19,7 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.PASSWORD }}
           key: ${{ secrets.SSH_KEY }}
-          key-path: ~/.ssh/id_rsa
           port: 22
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
