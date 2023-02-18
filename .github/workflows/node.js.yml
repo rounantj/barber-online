@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Debug SSH Key
+        run: echo "$SSH_PRIVATE_KEY"
+
       - name: SSH Deploy [Server PullUp HML DO]
         uses: appleboy/ssh-action@master
         with:
