@@ -28,11 +28,11 @@ jobs:
         run: npm run build
 
       - name: Deploy to DigitalOcean
-        uses: appleboy/ssh-action@v2.4.2
+        uses: appleboy/ssh-action@v2
         with:
           host: 192.241.153.48
           username: root
-          password: ${{ secrets.DIGITALOCEAN_PASSWORD }}
+          password: mdt1234@
           port: 22
           script: |
             cd /var/family/barber-online
