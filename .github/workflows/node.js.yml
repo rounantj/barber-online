@@ -15,16 +15,18 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "10.x"
+      - name: Install npm dependencies
+        run: npm install
+      - name: Run build task
+        run: npm run build --if-present
+
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_BARBER }}
+          PASSWORD: ${{ 'mdt1234@' }}
           ARGS: "-rlgoDzvc -i --delete"
           SOURCE: "dist/"
           REMOTE_HOST: ${{ '192.241.153.48' }}
           REMOTE_USER: ${{ 'root' }}
           TARGET: ${{ '/var/www/barber-online' }}
-      - name: Install npm dependencies
-        run: npm install
-      - name: Run build task
-        run: npm run build --if-present
+          EXCLUDE: "/dist/, /node_modules/"
