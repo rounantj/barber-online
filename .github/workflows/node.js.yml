@@ -1,34 +1,30 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+name: Node.js CD
 
-name: Node CI
-
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
+  deployment:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+      - name: SSH Deploy [Server PullUp HML DO]
+        uses: appleboy/ssh-action@master
         with:
-          node-version: "14.x"
-      - name: Install openssl
-        run: sudo apt-get install openssl
-      - name: Install npm dependencies
-        run: npm install
-
-      - name: Run build task
-        run: npm run build --if-present
-
-      - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_BARBER }}
-          ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.TARGET }}
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.DEPLOY_BARBER }}
+          port: 22
+          passphrase: mdt1234@
+          script: |
+            whoami
+            cd /var/www/barber-online
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+            nvm use 19.4.0
+            git pull
+            npm install
+            npm run build
+            pm2 restart all
