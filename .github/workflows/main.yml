@@ -6,37 +6,27 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v1
+      - name: Install Node.js
+        uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: "18.x"
 
-      - name: Install dependencies
+      - name: Install npm dependencies
         run: npm install
+      - name: Run build task
+        run: npm run build --if-present
 
-      - name: Build
-        run: npm run build
-
-      - name: Deploy to DigitalOcean
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          HOST: 192.241.153.48
-          USERNAME: root
-          PASSWORD: mdt1234@
-          PORT: 22
-          SCRIPT: |
-            cd /var/family/barber-online/
-            git pull
-            npm install
-            npm run build
-            pm2 restart all
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_BARBER }}
+          SOURCE: "dist/"
+          REMOTE_HOST: 192.241.153.48
+          REMOTE_USER: root
+          TARGET: /var/family/barber-online/
+          EXCLUDE: "/dist/, /node_modules/"
