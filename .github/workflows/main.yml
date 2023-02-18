@@ -26,10 +26,10 @@ jobs:
       - name: Deploy to DigitalOcean
         uses: easingthemes/ssh-deploy@v2
         with:
-          ssh_private_key: ${{ secrets.DEPLOY_BARBER }}
-          remote_host: 192.241.153.48
-          remote_user: root
-          remote_path: /var/family/barber-online
-          source: dist/
-          args: "-rlgoDzvc --delete"
-          exclude: ".git"
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_BARBER }}
+          REMOTE_HOST: 192.241.153.48
+          REMOTE_USER: root
+          TARGET: /var/family/barber-online
+          SOURCE: dist/
+          ARGS: "-rlgoDzvc --delete"
+          EXCLUDE: ".git"
