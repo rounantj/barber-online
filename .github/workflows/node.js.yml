@@ -14,14 +14,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Fazendo checkout
-        uses: actions/checkout@v1
-      - name: Deploy para digitalocean
+      - name: SSH Deploy [Server PullUp HML DO]
         uses: easingthemes/ssh-deploy@main
-        env:
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "dist/"
-          TARGET: ${{ secrets.TARGET }}
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          key-path: ~/.ssh/id_rsa
+          port: 22
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            whoami
+            cd /var/www/barber-online
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads fulls
+            nvm use 16
+            git pull
+            npm install
+            npm run build
+            pm2 restart barber
