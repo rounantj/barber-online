@@ -10,7 +10,6 @@
     "build": "tsc && cp -r public dist/",
     "deploy": "git add . && git commit -m \"to deploy\" && git push origin main && sshpass -p 'mdt1234@' ssh root@192.241.153.48 'cd /var/family/barber-online && git pull && npm install && npm run build && pm2 restart all'"
   },
-  
   "author": "",
   "license": "ISC",
   "dependencies": {
