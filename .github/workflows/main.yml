@@ -9,13 +9,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 16.x, 18.x]
+
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js 16.x
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
         run: npm install
@@ -26,10 +30,20 @@ jobs:
       - name: Deploy to DigitalOcean
         uses: easingthemes/ssh-deploy@v2
         with:
-          ssh_private_key: ${{ secrets.DEPLOY_BARBER }}
-          remote_host: 192.241.153.48
-          remote_user: root
-          target: /var/family/barber-online
+          ssh-private-key: ${{ secrets.DEPLOY_BARBER }}
+          remote-host: 192.241.153.48
+          remote-user: root
+          remote-port: 22
           source: dist/
+          target: /var/family/barber-online/
           args: "-rlgoDzvc --delete"
           exclude: ".git"
+
+      - name: Reload PM2 apps
+        uses: appleboy/ssh-action@master
+        with:
+          username: root
+          host: 192.241.153.48
+          port: 22
+          key: ${{ secrets.DEPLOY_BARBER }}
+          script: pm2 reload all
