@@ -23,10 +23,9 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
-          PASSWORD: ${{ 'mdt1234@' }}
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_BARBER }}
           ARGS: "-rlgoDzvc -i --delete"
           SOURCE: "dist/"
           REMOTE_HOST: ${{ '192.241.153.48' }}
           REMOTE_USER: ${{ 'root' }}
           TARGET: ${{ '/var/www/barber-online' }}
-          EXCLUDE: "/dist/, /node_modules/"
