@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Use Node.js 16.x
         uses: actions/setup-node@v2
@@ -25,12 +24,11 @@ jobs:
         run: npm run build
 
       - name: Deploy to DigitalOcean
-        uses: easingthemes/ssh-deploy@v3
+        uses: easingthemes/ssh-deploy@v2
         with:
           ssh-key: ${{ secrets.DEPLOY_BARBER }}
-          host: 192.241.153.48
-          username: root
-          password: mdt1234@
-          local_path: ./dist
+          remote_user: root
+          remote_host: 192.241.153.48
           remote_path: /var/family/barber-online
-          exclude: ".git*,node_modules"
+          local_path: dist/
+          exclude: ".git"
