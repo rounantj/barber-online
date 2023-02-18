@@ -22,7 +22,7 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
-          PASSWORD: mdt1234@
+          SSH_PRIVATE_KEY: mdt1234@
           SOURCE: "dist/"
           REMOTE_HOST: 192.241.153.48
           REMOTE_USER: root
