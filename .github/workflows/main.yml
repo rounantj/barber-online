@@ -34,6 +34,7 @@ jobs:
           USERNAME: root
           PASSWORD: mdt1234@
           PORT: 22
+          STRICT_HOST_KEY_CHECKING: no
           SCRIPT: |
             cd /var/family/barber-online/
             git pull
