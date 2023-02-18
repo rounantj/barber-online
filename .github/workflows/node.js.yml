@@ -28,5 +28,5 @@ jobs:
           SOURCE: "dist/"
           REMOTE_HOST: ${{ '192.241.153.48' }}
           REMOTE_USER: ${{ 'root' }}
-          TARGET: ${{ '/var/family/barber-online' }}
+          TARGET: ${{ '/var/www/barber-online' }}
           EXCLUDE: "/dist/, /node_modules/"
