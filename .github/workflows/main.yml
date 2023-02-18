@@ -23,7 +23,6 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_BARBER }}
-          ARGS: "-rlgoDzvc -i --delete"
           SOURCE: "dist/"
           REMOTE_HOST: 192.241.153.48
           REMOTE_USER: root
