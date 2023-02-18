@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to DigitalOcean
-        uses: appleboy/ssh-action@v0.4.2
+        uses: appleboy/ssh-action@v0.1.7
         with:
           REMOTE_HOST: 192.241.153.48
           REMOTE_USER: root
@@ -40,7 +40,7 @@ jobs:
           EXCLUDE: ".git"
 
       - name: Reload PM2 apps
-        uses: appleboy/ssh-action@v0.4.2
+        uses: appleboy/ssh-action@v0.1.7
         with:
           USERNAME: root
           HOST: 192.241.153.48
