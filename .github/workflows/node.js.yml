@@ -15,7 +15,7 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.DEPLOY_BARBER }}
+          key: ${{ secrets.SSH_KEY }}
           port: 22
           passphrase: mdt1234@
           script: |
