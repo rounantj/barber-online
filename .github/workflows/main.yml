@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to DigitalOcean
-        uses: easingthemes/ssh-deploy-with-password@v1
+        uses: appleboy/ssh-action@master
         with:
           REMOTE_HOST: 192.241.153.48
           REMOTE_USER: root
