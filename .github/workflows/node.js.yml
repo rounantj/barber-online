@@ -20,7 +20,7 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_KEY }}
-          key-path: ~/.ssh/nova_chave
+          key-path: ~/.ssh/id_rsa
           port: 22
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
