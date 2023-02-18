@@ -1,6 +1,10 @@
 name: Node.js CD
 
 on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
   push:
     branches:
       - main
@@ -17,14 +21,14 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          passphrase: mdt1234@
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             whoami
             cd /var/www/barber-online
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-            nvm use 19.4.0
+            nvm use 16
             git pull
             npm install
             npm run build
-            pm2 restart all
+            pm2 restart barber
