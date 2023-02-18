@@ -32,7 +32,7 @@ jobs:
         with:
           HOST: 192.241.153.48
           USERNAME: root
-          PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          PASSWORD: mdt1234@
           PORT: 22
           script: |
             rsync -avz --exclude='.git' dist/ root@192.241.153.48:/var/family/barber-online/
