@@ -6,52 +6,26 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v1
+      - name: Install Node.js
+        uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install dependencies
+          node-version: "18.x"
+      - name: Install npm dependencies
         run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Deploy to DigitalOcean
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
-        with:
-          server: 192.241.153.48
-          username: root
-          password: mdt1234@
-          server_port: 21
-          local_dir: ./dist
-          remote_dir: /var/family/barber-online/
-          exclude: |
-            .git*
-            *.map
-            *.yml
-            *.md
-          failOnError: true
-          continueOnError: false
-          debug: true
-
-      - name: Restart PM2
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: 192.241.153.48
-          username: root
-          password: mdt1234@
-          port: 22
-          script: |
-            cd /var/family/barber-online/
-            pm2 restart all
+      - name: Run build task
+        run: npm run build --if-present
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_BARBER }}
+          ARGS: "-rlgoDzvc -i --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: 192.241.153.48
+          REMOTE_USER: root
+          TARGET: /var/family/barber-online/
+          EXCLUDE: "/dist/, /node_modules/"
