@@ -36,7 +36,6 @@ jobs:
           REMOTE_PORT: 22
           SOURCE: dist/
           TARGET: /var/family/barber-online/
-          ARGS: "--delete"
           EXCLUDE: ".git"
 
       - name: Reload PM2 apps
