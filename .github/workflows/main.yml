@@ -35,7 +35,7 @@ jobs:
           PASSWORD: mdt1234@
           PORT: 22
           SOURCE: dist/
-          TARGET: /var/family/barber-online/
+          entryPoint: /var/family/barber-online/
           EXCLUDE: ".git"
 
       - name: Restart PM2
