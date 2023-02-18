@@ -8,8 +8,6 @@
     "dev": "npm run build && nodemon dist/app.js",
     "prod": "npm run build && node dist/app.js",
     "build": "tsc && cp -r public dist/"
-
-
 },
   "author": "",
   "license": "ISC",
