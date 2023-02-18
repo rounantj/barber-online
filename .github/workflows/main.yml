@@ -27,7 +27,7 @@ jobs:
       - name: Deploy to DigitalOcean
         uses: easingthemes/ssh-deploy@v3
         with:
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-key: ${{ secrets.DEPLOY_BARBER }}
           host: 192.241.153.48
           username: root
           password: mdt1234@
