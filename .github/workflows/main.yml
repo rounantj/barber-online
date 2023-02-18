@@ -30,9 +30,9 @@ jobs:
       - name: Deploy to DigitalOcean
         uses: easingthemes/ssh-deploy-with-password@v1
         with:
-          SSH_PASSWORD: mdt1234@
           REMOTE_HOST: 192.241.153.48
           REMOTE_USER: root
+          REMOTE_PASS: mdt1234@
           REMOTE_PORT: 22
           SOURCE: dist/
           TARGET: /var/family/barber-online/
