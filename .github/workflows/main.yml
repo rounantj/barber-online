@@ -28,22 +28,14 @@ jobs:
         run: npm run build
 
       - name: Deploy to DigitalOcean
-        uses: appleboy/ssh-action@latest
+        uses: appleboy/ssh-action@v2.4.2
         with:
-          REMOTE_HOST: 192.241.153.48
-          REMOTE_USER: root
-          PASSWORD: mdt1234@
-          REMOTE_PORT: 22
-          SOURCE: dist/
-          TARGET: /var/family/barber-online/
-          ARGS: "-rlgoDzvc --delete"
-          EXCLUDE: ".git"
-
-      - name: Reload PM2 apps
-        uses: appleboy/ssh-action@latest
-        with:
-          USERNAME: root
-          HOST: 192.241.153.48
-          PORT: 22
-          PASSWORD: mdt1234@
-          SCRIPT: pm2 reload all
+          host: 192.241.153.48
+          username: root
+          password: ${{ secrets.DIGITALOCEAN_PASSWORD }}
+          port: 22
+          script: |
+            cd /var/family/barber-online
+            rm -rf *
+            cp -r /home/runner/work/<YOUR-REPO-NAME>/<YOUR-REPO-NAME>/dist/* .
+            pm2 reload all
