@@ -28,16 +28,30 @@ jobs:
         run: npm run build
 
       - name: Deploy to DigitalOcean
+        uses: SamKirkland/FTP-Deploy-Action@4.2.1
+        with:
+          server: 192.241.153.48
+          username: root
+          password: mdt1234@
+          server_port: 21
+          local_dir: ./dist
+          remote_dir: /var/family/barber-online/
+          exclude: |
+            .git*
+            *.map
+            *.yml
+            *.md
+          failOnError: true
+          continueOnError: false
+          debug: true
+
+      - name: Restart PM2
         uses: appleboy/ssh-action@v0.1.7
         with:
-          HOST: 192.241.153.48
-          USERNAME: root
-          PASSWORD: mdt1234@
-          PORT: 22
-          STRICT_HOST_KEY_CHECKING: no
-          SCRIPT: |
+          host: 192.241.153.48
+          username: root
+          password: mdt1234@
+          port: 22
+          script: |
             cd /var/family/barber-online/
-            git pull
-            npm install
-            npm run build
             pm2 restart all
