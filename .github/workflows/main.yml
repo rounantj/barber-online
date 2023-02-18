@@ -32,11 +32,10 @@ jobs:
         with:
           HOST: 192.241.153.48
           USERNAME: root
-          PASSWORD: mdt1234@
+          PASSWORD: ${{ secrets.SSH_PASSWORD }}
           PORT: 22
-          SOURCE: dist/
-          entryPoint: /var/family/barber-online/
-          EXCLUDE: ".git"
+          script: |
+            rsync -avz --exclude='.git' dist/ root@192.241.153.48:/var/family/barber-online/
 
       - name: Restart PM2
         uses: appleboy/ssh-action@v0.1.7
