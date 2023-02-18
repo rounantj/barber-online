@@ -24,12 +24,12 @@ jobs:
         run: npm run build
 
       - name: Deploy to DigitalOcean
-        uses: easingthemes/ssh-deploy@v1.1.4
+        uses: easingthemes/ssh-deploy@v2
         with:
-          ssh_key: ${{ secrets.DEPLOY_BARBER }}
+          ssh_private_key: ${{ secrets.DEPLOY_BARBER }}
           remote_host: 192.241.153.48
           remote_user: root
           remote_path: /var/family/barber-online
-          local_path: dist/
+          source: dist/
           args: "-rlgoDzvc --delete"
           exclude: ".git"
