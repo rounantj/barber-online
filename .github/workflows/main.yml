@@ -30,22 +30,28 @@ jobs:
       - name: Deploy to DigitalOcean
         uses: appleboy/ssh-action@v0.1.7
         with:
-          REMOTE_HOST: 192.241.153.48
-          REMOTE_USER: root
+          HOST: 192.241.153.48
+          USERNAME: root
           PASSWORD: mdt1234@
-          REMOTE_PORT: 22
+          PORT: 22
           SOURCE: dist/
           TARGET: /var/family/barber-online/
           EXCLUDE: ".git"
 
-      - name: Build
-        run: pm2 restart all
+      - name: Restart PM2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          HOST: 192.241.153.48
+          USERNAME: root
+          PASSWORD: mdt1234@
+          PORT: 22
+          SCRIPT: pm2 restart all
 
       - name: Reload PM2 apps
         uses: appleboy/ssh-action@v0.1.7
         with:
-          USERNAME: root
           HOST: 192.241.153.48
-          PORT: 22
+          USERNAME: root
           PASSWORD: mdt1234@
+          PORT: 22
           SCRIPT: pm2 reload all
