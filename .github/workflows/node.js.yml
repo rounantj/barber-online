@@ -23,7 +23,7 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_BARBER }}
+          SSH_PRIVATE_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC/aDAulaFmKHYg71nqVnfiYycbXPr+HxG9xI4IKX3cFifEaSX4zGZgoFrasAFvNFp5MbsMopkYxU8zPY9MKKkEFd6phqDXdo6I+wjOG8PIHQBadb/0RN78gFpLufoghTViarGGj/Cn5yOIP8EG0M24c0B8FCOVArYvab6lKyhcnmLOS4uiOgs0FG+ZW2vonogw0SBoH+EK8fyY4ox6+LwuDLo59MgYU3+q2BMT90xF0zRe8uVvYWlI606Is0WrzxlbYDmzSpbatmUEqy8Zd5KrDpAaYJ0YbyCsiHTLyAO6SbesAXePkIrMcSWQASNwXYJ9XQABInOS+SC99kIeinOp/1bCCUqYOEzCGQylmrwVUdWX4KKf0lnDbQD9zbJr0x2u7UAqhDzpZ/IamT8MbNcvm/fS0kYok2F1yT0FamUsHuXVjsPFMotaF2GHCK3uHde2jwIUSA8NbB/ETknfcrzQomoeHabCfI9Ss+vrUtYuT+bJMu1IcepeKPU0Sq7CXotUOut+ZC4d3YcmCk9ojIQvvzmOwkSQM9fHqkNH+jI+zzAZ/VLNrUVW5jjyPBwmPyTCI8xWFQGt7QeCC4YRIqRpBy88T2ADjvI4T6Qyd3hF40cTwP0SInX1/DI5RMsaO4qAG9SeSEwkoEkiHsC6Aj9wvtFJTMSaJRq84i8e+ow0rQ== root@ubuntu-s-1vcpu-2gb-amd-nyc1-01
           ARGS: "-rlgoDzvc -i --delete"
           SOURCE: "dist/"
           REMOTE_HOST: ${{ '192.241.153.48' }}
