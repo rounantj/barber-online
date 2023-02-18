@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to DigitalOcean
-        uses: SamKirkland/FTP-Deploy-Action@4.2.1
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: 192.241.153.48
           username: root
