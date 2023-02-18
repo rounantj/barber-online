@@ -30,14 +30,14 @@ jobs:
       - name: Deploy to DigitalOcean
         uses: easingthemes/ssh-deploy@v2
         with:
-          ssh-private-key: ${{ secrets.DEPLOY_BARBER }}
-          remote-host: 192.241.153.48
-          remote-user: root
-          remote-port: 22
-          source: dist/
-          target: /var/family/barber-online/
-          args: "-rlgoDzvc --delete"
-          exclude: ".git"
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_BARBER }}
+          REMOTE_HOST: 192.241.153.48
+          REMOTE_USER: root
+          REMOTE_PORT: 22
+          SOURCE: dist/
+          TARGET: /var/family/barber-online/
+          ARGS: "-rlgoDzvc --delete"
+          EXCLUDE: ".git"
 
       - name: Reload PM2 apps
         uses: appleboy/ssh-action@master
