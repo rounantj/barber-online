@@ -38,6 +38,9 @@ jobs:
           TARGET: /var/family/barber-online/
           EXCLUDE: ".git"
 
+      - name: Build
+        run: pm2 restart all
+
       - name: Reload PM2 apps
         uses: appleboy/ssh-action@v0.1.7
         with:
