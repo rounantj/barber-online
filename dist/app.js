@@ -37,7 +37,6 @@ const handlebars = hbs.create({
     defaultLayout: "main",
 });
 dotenv_1.default.config();
-app.use(express_1.default.static("public"));
 app.engine("handlebars", handlebars.engine);
 app.set("view engine", "handlebars");
 app.set("views", `${__dirname}/../views`);
@@ -46,6 +45,7 @@ app.use("/api", api_1.default);
 app.use("/", views_1.default);
 //app.use("/api-docs", swaggerUi.serve, swaggerUi.setup("./swagger.yml"));
 const port = 3020;
+app.use(express_1.default.static("public"));
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });

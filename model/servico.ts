@@ -1,4 +1,4 @@
-import { Document, Schema, model } from 'mongoose';
+import { Document, Schema, model } from "mongoose";
 
 export interface IServico extends Document {
   usuario: string;
@@ -16,6 +16,6 @@ const ServicoSchema: Schema = new Schema({
   comissao: { type: Number, required: true },
 });
 
-const Servico = model<IServico>('Servico', ServicoSchema);
+const Servico = model<IServico>("Servico", ServicoSchema);
 
 export default Servico;

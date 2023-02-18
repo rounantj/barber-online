@@ -8,6 +8,6 @@ const ServicoSchema = new mongoose_1.Schema({
     valor: { type: Number, required: true },
     comissao: { type: Number, required: true },
 });
-const Servico = (0, mongoose_1.model)('Servico', ServicoSchema);
+const Servico = (0, mongoose_1.model)("Servico", ServicoSchema);
 exports.default = Servico;
 //# sourceMappingURL=servico.js.map
