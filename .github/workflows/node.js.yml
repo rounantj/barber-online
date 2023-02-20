@@ -29,7 +29,7 @@ jobs:
             whoami
             cd /var/www/barber-online
             export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
             nvm use 16
             git pull
             npm install
