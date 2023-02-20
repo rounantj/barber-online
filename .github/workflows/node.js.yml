@@ -16,7 +16,6 @@ jobs:
           username: "root"
           no-verify: true
           key: ${{ secrets.SSH_KEY }}
-          password: "mdt1234@"
           script: |
             cd /var/family/barber-online && 
             git fetch &&
