@@ -9,11 +9,6 @@ jobs:
   pipeline-cd:
     runs-on: ubuntu-latest
     steps:
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
-
       - name: Update the application
         uses: appleboy/ssh-action@master
         with:
