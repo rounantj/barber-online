@@ -15,7 +15,7 @@ jobs:
           host: "mackbarbearia.com.br"
           username: "root"
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          password: "mdt1234@"
+          password: "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"
           script: |
             cd /var/family/barber-online && 
             git fetch &&
