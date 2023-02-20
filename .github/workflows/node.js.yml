@@ -12,9 +12,9 @@ jobs:
       - name: Update the application
         uses: appleboy/ssh-action@master
         with:
-          host: mackbarbearia.com.br
-          username: root
-          password: mdt1234@
+          host: "mackbarbearia.com.br"
+          username: "root"
+          password: "mdt1234@"
           script: |
             cd /var/family/barber-online && 
             git fetch &&
