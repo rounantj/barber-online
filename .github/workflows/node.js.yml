@@ -12,13 +12,10 @@ jobs:
       - name: Update the application
         uses: appleboy/ssh-action@master
         with:
-          host: "mackbarbearia.com.br"
-          username: "root"
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
           no-verify: true
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/family/barber-online && 
-            git fetch &&
-            git checkout ${{ steps.extract_branch.outputs.branch }} &&
-            git pull origin ${{ steps.extract_branch.outputs.branch }} && cd /var/family/barber-online &&
             pm2 restart all
