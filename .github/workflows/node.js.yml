@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: SSH Deploy TEST
+      - name: SSH Deploy TES
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
