@@ -14,6 +14,7 @@ jobs:
         with:
           host: "mackbarbearia.com.br"
           username: "root"
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           password: "mdt1234@"
           script: |
             cd /var/family/barber-online && 
