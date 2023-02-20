@@ -22,7 +22,7 @@ jobs:
           git config --global user.email "rounantj@hotmail.com"
           git config --global user.name "cicd"
           git config --global credential.helper store
-          echo "${{ secrets.TOKEN }}" | git login https://github.com
+          echo "${{ secrets.TOKEN }}" | git credential fill
 
       - name: SSH Deploy TESTES
         uses: appleboy/ssh-action@master
