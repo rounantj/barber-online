@@ -23,7 +23,6 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          no-verify: true
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/family/barber-online &&
