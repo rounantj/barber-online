@@ -18,4 +18,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/family/barber-online && 
-            pm2 restart all
+            git pull
