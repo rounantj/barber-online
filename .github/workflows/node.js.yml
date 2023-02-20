@@ -29,5 +29,4 @@ jobs:
             cd /var/family/barber-online &&
             git pull &&
             npm install &&
-            npm run build &&
-            pm2 reload all
+            npm run build
