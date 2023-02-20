@@ -27,7 +27,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             whoami
-            cd /var/www/barber-online
+            cd /var/barber-online
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
             nvm use 16
