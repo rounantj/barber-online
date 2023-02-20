@@ -20,8 +20,9 @@ jobs:
       - name: Configure Git
         run: |
           git config --global user.email "rounantj@hotmail.com"
-          git config --global user.name "cicd"
+          git config --global user.name "rounantj"
           git config --global credential.helper store
+          git config --global credential.username "cicd"
           echo "${{ secrets.TOKEN }}" | git credential fill
 
       - name: SSH Deploy TESTES
