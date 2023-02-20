@@ -9,6 +9,15 @@ jobs:
   pipeline-cd:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build application
+        run: npm run build
+
       - name: Update the application
         uses: appleboy/ssh-action@master
         with:
@@ -17,5 +26,8 @@ jobs:
           no-verify: true
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/family/barber-online && 
-            git pull
+            cd /var/family/barber-online &&
+            git pull &&
+            npm install &&
+            npm run build &&
+            pm2 reload all
