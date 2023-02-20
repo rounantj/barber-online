@@ -1,30 +1,28 @@
-name: Node.js CD
+name: CD(continuous deploy)
 
 on:
-  pull_request:
-    types: [closed]
-    branches:
-      - main
   push:
     branches:
       - main
 
 jobs:
-  deployment:
+  pipeline-cd:
     runs-on: ubuntu-latest
-
     steps:
-      - name: SSH RONAN NEW.
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Update the application
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: 22
+          password: ${{ secrets.PASSWORD }}
           script: |
-            whoami
-            cd /var/www/barber-online
-            git pull
-            npm install
-            npm run build
-            pm2 restart barber
+            cd /var/family/barber-online && 
+            git fetch &&
+            git checkout ${{ steps.extract_branch.outputs.branch }} &&
+            git pull origin ${{ steps.extract_branch.outputs.branch }} && cd /var/family/barber-online &&
+            pm2 restart all
